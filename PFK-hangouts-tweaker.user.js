@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK hangouts tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2020.0731.1545
+// @version      2020.0813.2130
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://hangouts.google.com/webchat/*
@@ -110,5 +110,8 @@
     // my outbound message background, and it's tail
     GM_addStyle(".pj .KRQuhe { background-color: "+pfkHangoutValues.msgBGColor +"; }");
     GM_addStyle(".pj .jHldnd { border: 8px solid "+pfkHangoutValues.msgBGColor +"; }");
+
+    // animate the box that appears when the other person is typing
+    GM_addStyle(".iF9mle.V8WHrc { transition: all .2s linear .2s; }");
 
 })();
