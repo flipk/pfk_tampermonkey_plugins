@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2020.0803.1112
+// @version      2020.0901.2109
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -367,6 +367,10 @@
         GM_addStyle(cards[i] + '{background-color: ' + pfkChatValues.cardBGColor + ';}');
     }
 
+    // text too close to the scrollbar looks scrunched and
+    // makes you think it's actually clipping something --
+    // add a small pad.
+    GM_addStyle(".oGsu4 {padding-right:5px;}");
     // border-radius on messages looks silly
     GM_addStyle(".dsoUjb {border-radius:0px;}");
 
