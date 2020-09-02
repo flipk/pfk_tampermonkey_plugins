@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2020.0901.2109
+// @version      2020.0902.0923
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -264,11 +264,15 @@
                         }
                     };
                     // put the more-button inside the div containing "CHAT"
-                    d.firstChild.appendChild(more_dd);
+                    d.firstChild.firstChild.appendChild(more_dd);
                     pfkChatValues.moreInstalled = true;
                 }
             }
         }
+
+        // the "+" button inside the chat box is too tall
+        GM_addStyle(".gNOOBf {height:17px;} " +
+                    ".cq5Gac {height:20px;}");
 
         if (pfkChatValues.botsHidden == false)
         {
