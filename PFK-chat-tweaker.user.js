@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2020.1010.1722
+// @version      2020.1020.2303
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -377,8 +377,51 @@
         // nudge picture down a few pixels to make a prettier margin
         GM_addStyle(".HTZBof {margin-top:5px;}");
 
+        // there's a massive gap between the last message and the typing box;
+        // this is where the 'user is typing...' message goes, but when that message
+        // isn't there, it should be small.
+        GM_addStyle(".tRuV8b .WQKmIb .auHzcc { margin-bottom: 3px; }");
+        // dont translate the "user is typing..." up to the top of that little
+        // blue box, move it down.
+        GM_addStyle(".tRuV8b .bNfiFb { transform: none; }");
+
         // where you type
         GM_addStyle(".IEIJqd.qs41qe { background-color: "+pfkChatValues.msgBGColor+"; }");
+        GM_addStyle(".XganBc { border-radius: 0px; }");
+        // make it not so freaking tall and with less pointless whitespace
+        GM_addStyle(".igYHTd { min-height: 24px; }" +
+                    ".I0LFzc { min-height: 24px; }" +
+                    ".zFe2Ef { height: 24px; min-height: 24px; }"
+                   );
+        GM_addStyle(".tRuV8b .dJ9vNe.DbQnIe { border-radius: 0; flex-direction: row; min-height: 24px; }" +
+                    ".tRuV8b .dJ9vNe.DbQnIe .EFNTcf { min-height: 24px; }" +
+                    ".tRuV8b .I0LFzc .dJ9vNe.DbQnIe .stD1Se { margin: 0; }" +
+                    ".tRuV8b .dJ9vNe.DbQnIe .stD1Se { margin: 0; }" +
+                    ".tRuV8b .I0LFzc .dJ9vNe.DbQnIe .oAzRtb { margin: 0; padding: 0; }"
+                   );
+
+        // if the conversation window gets bigger than 375px, a different
+        // set of rules kick in!
+        GM_addStyle(".WQKmIb .IEIJqd .XganBc { padding: 0; }");
+        GM_addStyle(".I0LFzc { border-radius: 0; }");
+        GM_addStyle(".Ct5IYc { padding: 0; }");
+        GM_addStyle(".PhFuQe.yXgmRe .dJ9vNe { background-color: "+pfkChatValues.msgBGColor+"; }");
+        // the buttons and switches on the right of the whereyoutype are way to spacey
+        GM_addStyle(".LsSwGf { width: 24px; }" +
+                    ".wmbLw { margin: 0; }" +
+                    ".EFNTcf .zS8jHe { margin: 0; }" +
+                    ".wAZd3e { height: 24px; width; 24px; }" +
+                    ".EFNTcf, .CfUpN { min-height: 32px; }" +
+                    ".XT3Vq { margin: 3px; }" +
+                    ".WQKmIb .IEIJqd .I0LFzc { background-color: " + pfkChatValues.msgBGColor + "; }"
+                   );
+
+        // if you maximize a conversation to the gmail window, yet
+        // another set of rules kick in!
+        GM_addStyle(".dsoUjb { border-radius: 0; }" +
+                    ".EFNTcf, .CfUpN { min-height: 24px; }" +
+                    ".oAzRtb { padding: 0; }"
+                   );
 
         installScrollBarEnhancements();
     }
