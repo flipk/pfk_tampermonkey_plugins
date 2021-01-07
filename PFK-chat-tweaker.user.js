@@ -51,7 +51,12 @@
 
     function turnStuffRed() {
         pfkChatValues.intervals++;
-//dbg   console.log("PFK chat unread timer, intervals = ",intervals,"count1 = ",count1);
+        if (0) { // dbg
+            console.log("PFK chat unread timer, intervals = ",
+		        pfkChatValues.intervals,
+		        "count1 = ",
+		        pfkChatValues.count1);
+        }
 
         // this plugin gets fired multiple times on a single page,
         // but only one is inside the iframe containing the DOM that we
@@ -252,7 +257,7 @@
                         }
                     };
                     // put the more-button inside the div containing "CHAT"
-                    d.firstChild.firstChild.appendChild(more_dd);
+                    d.firstChild.appendChild(more_dd);
                     pfkChatValues.moreInstalled = true;
                 }
             }
@@ -582,3 +587,9 @@
     }
 
 })();
+
+// Local Variables:
+// mode: Javascript
+// indent-tabs-mode: nil
+// tab-width: 8
+// End:
