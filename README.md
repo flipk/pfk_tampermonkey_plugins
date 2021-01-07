@@ -14,7 +14,7 @@ The conference room names at PFK's workplace are very long and usually don't fit
 anywhere in any box they appear in in Google Calendar. This script finds those long
 names and trims the redundant parts of the string out of them so they fit.
 
-### Install : [PFK-calendar-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/master/PFK-calendar-tweaker.user.js)
+### Install : [PFK-calendar-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-calendar-tweaker.user.js)
 
 ## Google Chat Tweaker
 
@@ -37,31 +37,31 @@ leave the gosh darned thing open!  Sorry about the language.
 Scrunch up everything!!!!
 * Didn't like the logo
 
-### Install : [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/master/PFK-chat-tweaker.user.js)
+### Install : [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
 
 ## Google Mail Background
 
 Stupid corp config won't let corp users put in their own custom images for
 the gmail background, so I hacked one in.
 
-### Install : [PFK-gmail-background.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/master/PFK-gmail-background.user.js)
+### Install : [PFK-gmail-background.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
 
 ## Google Mail Unread Red
 
 When a folder has unread messages, the bold font is too similar to the regular
 font to be noticable. Turn the folder name red, too.
 
-### Install : [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/master/PFK-gmail-unread-red.user.js)
+### Install : [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
 
 ## Google Hangouts Tweaker
 
 Make color scheme of a conversation match the color scheme of the Chat Tweaker.
 
-### Install : [PFK-hangouts-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/master/PFK-hangouts-tweaker.user.js)
+### Install : [PFK-hangouts-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-hangouts-tweaker.user.js)
 
 ## Weather.com map sidebar closer
 
 That right hand sidebar on weather.com's radar map takes up a lot of space and is
 useless. Close it.
 
-### Install : [PFK-weathermap-sidebar-closer.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/master/PFK-weathermap-sidebar-closer.user.js)
+### Install : [PFK-weathermap-sidebar-closer.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-weathermap-sidebar-closer.user.js)
