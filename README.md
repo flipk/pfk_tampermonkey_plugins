@@ -58,10 +58,3 @@ font to be noticable. Turn the folder name red, too.
 Make color scheme of a conversation match the color scheme of the Chat Tweaker.
 
 ### Install : [PFK-hangouts-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-hangouts-tweaker.user.js)
-
-## Weather.com map sidebar closer
-
-That right hand sidebar on weather.com's radar map takes up a lot of space and is
-useless. Close it.
-
-### Install : [PFK-weathermap-sidebar-closer.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-weathermap-sidebar-closer.user.js)
