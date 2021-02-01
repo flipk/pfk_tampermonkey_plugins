@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2021.0107.1310
+// @version      2021.0201.0853
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -353,6 +353,9 @@
 
         // put a small margin between msgs
         GM_addStyle(".WQKmIb .ajCeRb:not(.zzVqCe) { padding: 0px; }");
+
+        // too much whitespace between lines of text, scrunch it up a little.
+        GM_addStyle(".Zc1Emd {line-height: 1.00rem;}");
 
         // border-radius on messages looks silly
         GM_addStyle(".tRuV8b .dsoUjb {border-radius:0px;}");
