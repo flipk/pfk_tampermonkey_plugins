@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2021.0201.0853
+// @version      2021.0215.0842
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -356,6 +356,8 @@
 
         // too much whitespace between lines of text, scrunch it up a little.
         GM_addStyle(".Zc1Emd {line-height: 1.00rem;}");
+        // same in the text-entry box
+        GM_addStyle(".BScnzc {line-height: 1.00rem;}");
 
         // border-radius on messages looks silly
         GM_addStyle(".tRuV8b .dsoUjb {border-radius:0px;}");
@@ -388,7 +390,7 @@
         // there's a massive gap between the last message and the typing box;
         // this is where the 'user is typing...' message goes, but when that message
         // isn't there, it should be small.
-        GM_addStyle(".tRuV8b .WQKmIb .auHzcc { margin-bottom: 3px; }");
+        GM_addStyle(".tRuV8b .WQKmIb .auHzcc { margin-bottom: 3px; padding-bottom: 0px; }");
         // dont translate the "user is typing..." up to the top of that little
         // blue box, move it down.
         GM_addStyle(".tRuV8b .bNfiFb { transform: none; }");
