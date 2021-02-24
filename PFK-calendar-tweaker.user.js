@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK calendar tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2020.0729.1648
+// @version      2021.0224.1131
 // @description  stupid corp conference room names are sooooo wide
 // @author       pfk@pfk.org
 // @match        https://calendar.google.com/calendar/*
@@ -52,10 +52,10 @@
             for (ind = 0; ind < count; ind++) {
                 d = pfkDivs[ind];
                 var t = d.innerText;
-                if (t.startsWith("CR-IL06-VIDEO-0")) {
-                    d.innerText = t.substring(15,80);
-                } else if (t.startsWith("CR-IL06-0")) {
-                    d.innerText = t.substring(9,80);
+                if (t.startsWith("IL06-SCHAUMBURG-0")) {
+                    d.innerText = t.substring(17,80);
+                } else if (t.startsWith("IL06-SCHAUMBURG-VIDEO-0")) {
+                    d.innerText = t.substring(23,80);
                 }
             }
         }
