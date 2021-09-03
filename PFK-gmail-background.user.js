@@ -11,15 +11,19 @@
 (function() {
     'use strict';
 
-    var bg = "background-image:url(https://4122a438-a-62cb3a1a-s-sites.googlegroups.com/site/phillipfknaack/home/pics/batarang/batarang_2_1280x1024.png)";
-// "background:#102030;"
+    var bgUrl = "https://4122a438-a-62cb3a1a-s-sites.googlegroups.com/site/phillipfknaack/home/pics/batarang/batarang_2_1280x1024.png";
+    var bg = "background-image:url(" + bgUrl + ");" +
+        "width: 100%;" +
+        "height: 100%;" +
+        "background-size: cover;" +
+        "background-position: center;";
 
     var setBackground = function() {
         var bgSet = 0;
-        var pfkDivs = document.getElementsByClassName("no");
+        var pfkDivs = document.getElementsByClassName("wl");
         if (pfkDivs !== undefined)
         {
-            var pfkDiv = pfkDivs[1];
+            var pfkDiv = pfkDivs[0];
             if (pfkDiv !== undefined)
             {
                 pfkDiv.setAttribute("style",bg);
@@ -35,25 +39,5 @@
     };
 
     setBackground();
-
-    // set "a3s" and "g6" to font-family Roboto, font-size 120%
-    function setfonts(classname) {
-        var ind, pfkDivs = document.getElementsByClassName(classname);
-        if (pfkDivs != undefined) {
-            for (ind = 0; ind < pfkDivs.length; ind++) {
-                var d = pfkDivs[ind];
-                d.setAttribute("style","font-family:Roboto; font-size:120%");
-            }
-        }
-    }
-
-    var setTextFonts = function() {
-        setfonts("a3s"); // expanded messages
-        setfonts("g6"); // one-line preview unexpanded message
-        setfonts("editable"); // compose box
-        window.setTimeout(setTextFonts,2000);
-    };
-
-// disabled because it sucks    setTextFonts();
 
 })();
