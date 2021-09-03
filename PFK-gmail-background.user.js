@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2020.0729.1648
+// @version      2021.0902.2205
 // @description  stupid corp config won't let you set a custom background in gmail tab, so this script will set one for you.
 // @author       You
 // @match        https://mail.google.com/*
 // @grant        none
 // ==/UserScript==
+// TODO : look at installing as a new <div> underneath the “wl” class div just like the public gmail.
 
 (function() {
     'use strict';

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2021.0215.0842
+// @version      2021.0902.2208
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -32,13 +32,12 @@
     pfkChatValues.id = Math.trunc(Math.random() * 1000000);
     pfkChatValues.bodyTag = document.getElementsByTagName("body");
 
-    console.log("chat tweaker id",pfkChatValues.id,"started values=",pfkChatValues,"body=",pfkChatValues.bodyTag);
-
     // debug trick! make a non-displaying div at the end
     // of <body> and hide the data-model object as a new
     // member of that div, so you can access it from the
     // console using (e.g.):
 
+    console.log("chat tweaker id",pfkChatValues.id,"started values=",pfkChatValues,"body=",pfkChatValues.bodyTag);
     console.log("do this: v = document.getElementById(\"pfkChatValues\").pfkChatValues ; pfkChatValues = v");
 
     dd = document.createElement("div");
@@ -84,8 +83,14 @@
                 pfkChatValues.count1++;
             }
 
-            // SZ9zpc is used only in a PWA app, it's where the @Chat logo goes
-            if (document.getElementsByClassName("SZ9zpc").length > 0) // in PWA app only!
+            // SZ9zpc is used only in a PWA app, it's where the @Chat logo goes.
+            // however, in the newPWA app, the userlist in gmail and the newPWA are
+            // nearly identical due to the use of iframes for both, so this code no
+            // longer works.
+            // NOTE for future: if there's a way to figure out what hides or exposes
+            // the message preview (class kjWKTd has display:none in gmail tab) then
+            // this could be a way to determine this.
+            if (0) if (document.getElementsByClassName("SZ9zpc").length > 0) // in PWA app only!
             {
                 console.log("PFK",pfkChatValues.id,"found PWA");
                 pfkChatValues.inGmailTab = 1; // PWA
