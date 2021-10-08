@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2020.1007.2050
+// @version      2020.1008.1644
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -13,7 +13,7 @@
     'use strict';
 
     // the "n1" class is added to unread folder names
-    GM_addStyle(".TO .nU.n1>.n0 { color:red; }");
+    GM_addStyle(".nU.n1>.n0 { color:red !important; }");
 
     if (0) // THE OLD WAY!!!
     {
