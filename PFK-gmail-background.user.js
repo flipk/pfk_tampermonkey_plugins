@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2021.0902.2205
+// @version      2021.1007.1233
 // @description  stupid corp config won't let you set a custom background in gmail tab, so this script will set one for you.
 // @author       You
-// @match        https://mail.google.com/*
+// @match        https://mail.google.com/mail/*
 // @grant        none
 // ==/UserScript==
-// TODO : look at installing as a new <div> underneath the “wl” class div just like the public gmail.
+
+// NOTE if you only match mail.google.com/*, this will fire in the chat PWA app too.
+//      to prevent that, it must match mail.google.com/mail/* instead.
 
 (function() {
     'use strict';
@@ -34,7 +36,7 @@
 
         if (bgSet === 0)
         {
-//          console.warn("PFK Gmail Background Setter did not find the right div");
+            console.warn("PFK Gmail Background Setter did not find the right div");
             window.setTimeout(setBackground,2000);
         }
     };

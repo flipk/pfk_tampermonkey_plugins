@@ -18,24 +18,16 @@ names and trims the redundant parts of the string out of them so they fit.
 
 ## Google Chat Tweaker
 
-The Google Chat web application is obnoxious in quite a number of ways.
+This tweaks Google Chat inside a GMAIL tab. NOTE the standalone
+Google Chat app is not supported by this plugin, because I don't
+personally use it.
 
 * The color scheme is boring: black and white.
-* The whitespace is enormous: a window 500 pixels by 500 pixels gets,
-like, 12 names in it. That is just atrocious.
-* When a person has unread messages, the person's name changes to bold,
-but the difference between the regular font and the bold font is so slight,
-sometimes you don't notice you don't have messages!
-* Showing the date/time of the last interaction with a user is kind of useless.
-You know what I want? How long have they been idle?
-* The "more" and "less" contacts buttons take up a lot of space, and why are
-there two lists of contacts? Just make one with a "more" button that expands it
-when you want it.
-* The "more" contacts button times out and closes itself! Why? If I want it open,
-leave the gosh darned thing open!  Sorry about the language.
 * Why is there sooooo gooooosh daaaarnned muuuuch whiiiiitespaaaaaace?
 Scrunch up everything!!!!
-* Didn't like the logo
+* When a person has unread messages, the person's name changes to bold,
+but the difference between the regular font and the bold font is so slight,
+sometimes you don't notice you have unread messages!
 
 ### Install : [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
 
@@ -52,9 +44,3 @@ When a folder has unread messages, the bold font is too similar to the regular
 font to be noticable. Turn the folder name red, too.
 
 ### Install : [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
-
-## Google Hangouts Tweaker
-
-Make color scheme of a conversation match the color scheme of the Chat Tweaker.
-
-### Install : [PFK-hangouts-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-hangouts-tweaker.user.js)
