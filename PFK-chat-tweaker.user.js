@@ -81,7 +81,7 @@
         // too much whitespace between lines of text, scrunch it up a little.
         GM_addStyle(".Zc1Emd {line-height: 1.00rem;}");
         // same in the text-entry box
-        GM_addStyle(".BScnzc {line-height: 1.00rem;}");
+        GM_addStyle(".BScnzc {line-height: 1.00rem; min-height: 0;}");
 
         // border-radius on messages looks silly
         GM_addStyle(".tRuV8b .dsoUjb {border-radius:0px;}");
