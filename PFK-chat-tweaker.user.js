@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat2 tweaker2
 // @namespace    http://tampermonkey.net/
-// @version      2021.1007.1244
+// @version      2021.1020.1004
 // @description  make unread things red
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
