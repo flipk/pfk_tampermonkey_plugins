@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2021.1007.1233
 // @description  stupid corp config won't let you set a custom background in gmail tab, so this script will set one for you.
-// @author       You
+// @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
 // @grant        none
 // ==/UserScript==

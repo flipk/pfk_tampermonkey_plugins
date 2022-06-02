@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         PFK instagram click-enabler
+// @name         instagram features
 // @namespace    http://tampermonkey.net/
-// @version      2022.0425.2142
-// @description  enable image and video processing on instagram
-// @author       PFK
+// @version      2022.0601.2036
+// @description  feature modification on instagram
+// @author       pfk@pfk.org
 // @match        https://www.instagram.com/*
 // @icon         https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png
 // @grant        GM_addStyle
@@ -44,7 +44,6 @@
             for (ind = 0; ind < imgs.length; ind++)
             {
                 var i = imgs[ind];
-//                console.log("processing ind ",ind," which is ",i);
                 if (i.srcset !== undefined &&
                     i.srcset !== null &&
                     i.srcset !== '') {
@@ -98,44 +97,42 @@
         GM_addStyle(".fXIG0 { display:none !important; }");
         GM_addStyle(".PyenC { display:none !important; }");
 
-        lookForThings();
+//        lookForThings();
     }
 
     window.setTimeout(installThings, 1000);
+
+    // doesnt work but fun to write, saving here for future reference
+    document.findmp4 = function() {
+        var sdivs = document.getElementsByTagName("script");
+        var ret = [];
+        var retind = 0;
+        var widest = 0;
+        var widesturl = "";
+        for (var ind = 0; ind < sdivs.length; ind++) {
+            var sdiv = sdivs[ind];
+            if (sdiv.innerHTML.length > 0) {
+                var res = /(.*)__additionalDataLoaded\('.*',(.*)\);/.exec(sdivs[22].innerHTML);
+                if (res != null) {
+                    var ds = JSON.parse(res[2]);
+                    if (ds != null) {
+                        ret[retind++] = ds;
+                        for (var itemind = 0; itemind < ds.items.length; itemind++) {
+                            var item = ds.items[itemind];
+                            for (var videoind = 0; videoind < item.video_versions.length; videoind++) {
+                                var vv = item.video_versions[videoind];
+                                if (vv.width > widest) {
+                                    widest = vv.width;
+                                    widesturl = vv.url;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        console.log("url:",widesturl);
+        return ret;
+    };
+
 })();
-
-
-// videos:
-
-// In the Network tab of chrome debugger you can find a “fetch” for a
-// “webm” file.  Remove the bytestart= and byteend= from the url and
-// wget that.  Then convert to mp4:
-
-// ffmpeg -i b.webm -strict experimental -c:v libx264 -preset fast
-// -crf 18 -an -y b2.mp4
-
-// Now vlc can play it
-
-// The trick? How to find this url in the source document.  THE URL is
-// in the javascript, either webm or webp, at least for the one I
-// found.
-
-// example:
-// https://scontent-hou1-1.cdninstagram.com/v/t66.30100-16/49227004_388827406076556_1900417603931306924_n.webm?
-// _nc_ht=scontent-hou1-1.cdninstagram.com&_nc_cat=100&_nc_ohc=QeREOBqJl0EAX-Cox_o&edm=AABBvjUBAAAA&ccb=7-4&
-// oh=00_AT8nF-XxgOhhEKb8jsGH1BGpHUNJmTsnWlglFzVHAfNWoA&oe=62613F95&_nc_sid=83d603
-
-// var scripts=document.getElementsByTagName("script");
-// Search scripts[*].innerHTML for the url
-
-
-
-// Local Variables:
-// mode: javascript
-// indent-tabs-mode: nil
-// tab-width: 8
-// eval: (add-hook 'write-file-functions 'time-stamp)
-// time-stamp-start: "last modified = "
-// time-stamp-format: "%:y-%02m-%02d.%02H:%02M:%02S"
-// time-stamp-end: "$"
-// End:
