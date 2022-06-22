@@ -89,7 +89,7 @@
 
         // for images
         // - make cover div have display:none so the <img> comes to top
-        GM_addStyle("._aagw { display:none; }");
+        GM_addStyle("._aagw { display:none !important; }");
 
         // for videos: make fXIG0 display:none so <video> comes to top
         GM_addStyle(".fXIG0 { display:none !important; }");
