@@ -8,32 +8,32 @@ Then, click the various "Install" links below to install those plugins.
 
 ## Google Calendar Tweaker
 
-### Install : [PFK-calendar-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-calendar-tweaker.user.js)
+### Install : [PFK-calendar-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-calendar-tweaker.user.js)
 
 ## Google Chat Tweaker
 
-### Install : [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
+### Install : [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-chat-tweaker.user.js)
 
 ## Google Chat2 Tweaker2
 
-### Install : [PFK-chat2-tweaker2.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat2-tweaker2.user.js)
+### Install : [PFK-chat2-tweaker2.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-chat2-tweaker2.user.js)
 
 ## Google Docs Tweaker
 
-### Install : [PFK-google-docs.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-google-docs.user.js)
+### Install : [PFK-google-docs.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-google-docs.user.js)
 
 ## Google Mail Background
 
-### Install : [PFK-gmail-background.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
+### Install : [PFK-gmail-background.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-gmail-background.user.js)
 
 ## Google Mail Unread Red
 
-### Install : [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
+### Install : [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-gmail-unread-red.user.js)
 
 ## 500px features
 
-### Install : [PFK-500px.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-500px.user.js)
+### Install : [PFK-500px.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-500px.user.js)
 
 ## instagram features
 
-### Install : [PFK-instagram.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-instagram.user.js)
+### Install : [PFK-instagram.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-instagram.user.js)

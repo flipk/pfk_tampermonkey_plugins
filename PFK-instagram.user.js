@@ -88,10 +88,8 @@
     function installThings() {
 
         // for images
-        // - make _9AhH0 have display:none so the <img> comes to top
-        // - make FFVAD have user-select: all
-        GM_addStyle("._9AhH0 { display:none; }");
-        GM_addStyle(".FFVAD { user-select: all; }");
+        // - make cover div have display:none so the <img> comes to top
+        GM_addStyle("._aagw { display:none; }");
 
         // for videos: make fXIG0 display:none so <video> comes to top
         GM_addStyle(".fXIG0 { display:none !important; }");
