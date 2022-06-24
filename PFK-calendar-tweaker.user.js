@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK calendar tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2021.0224.1131
+// @version      2022.0623.2001
 // @description  stupid corp conference room names are sooooo wide
 // @author       pfk@pfk.org
 // @match        https://calendar.google.com/calendar/*
@@ -93,3 +93,13 @@
     setCrNames();
 
 })();
+
+// Local Variables:
+// mode: javascript
+// indent-tabs-mode: nil
+// tab-width: 8
+// eval: (add-hook 'write-file-functions 'time-stamp)
+// time-stamp-start: "@version      "
+// time-stamp-format: "%Y.%02m%02d.%02H%02M"
+// time-stamp-end: "$"
+// End:

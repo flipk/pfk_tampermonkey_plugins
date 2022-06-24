@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2021.1007.1233
+// @version      2022.0623.2001
 // @description  stupid corp config won't let you set a custom background in gmail tab, so this script will set one for you.
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -44,3 +44,13 @@
     setBackground();
 
 })();
+
+// Local Variables:
+// mode: javascript
+// indent-tabs-mode: nil
+// tab-width: 8
+// eval: (add-hook 'write-file-functions 'time-stamp)
+// time-stamp-start: "@version      "
+// time-stamp-format: "%Y.%02m%02d.%02H%02M"
+// time-stamp-end: "$"
+// End:

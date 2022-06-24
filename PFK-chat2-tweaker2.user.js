@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat2 tweaker2
 // @namespace    http://tampermonkey.net/
-// @version      2021.1020.1004
+// @version      2022.0623.2001
 // @description  chat tweaker broken so chat2 tweaker2 lives
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -162,3 +162,13 @@
     }
 
 })();
+
+// Local Variables:
+// mode: javascript
+// indent-tabs-mode: nil
+// tab-width: 8
+// eval: (add-hook 'write-file-functions 'time-stamp)
+// time-stamp-start: "@version      "
+// time-stamp-format: "%Y.%02m%02d.%02H%02M"
+// time-stamp-end: "$"
+// End:

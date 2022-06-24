@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         instagram features
 // @namespace    http://tampermonkey.net/
-// @version      2022.0601.2036
+// @version      2022.0623.2001
 // @description  feature modification on instagram
 // @author       pfk@pfk.org
 // @match        https://www.instagram.com/*
@@ -134,3 +134,13 @@
     };
 
 })();
+
+// Local Variables:
+// mode: javascript
+// indent-tabs-mode: nil
+// tab-width: 8
+// eval: (add-hook 'write-file-functions 'time-stamp)
+// time-stamp-start: "@version      "
+// time-stamp-format: "%Y.%02m%02d.%02H%02M"
+// time-stamp-end: "$"
+// End:
