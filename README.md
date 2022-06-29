@@ -17,4 +17,4 @@
 ### [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-gmail-unread-red.user.js)
 ### [PFK-500px.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-500px.user.js)
 ### [PFK-instagram.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-instagram.user.js)
-
+### [PFK-gocomics.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-gocomics.user.js)
