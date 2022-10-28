@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2022.0623.2001
-// @description  stupid corp config won't let you set a custom background in gmail tab, so this script will set one for you.
+// @version      2022.1027.2020
+// @description  put background image in the proper div since theirs sucks.
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
 // @grant        none
@@ -16,32 +16,54 @@
 
     var bgUrl = "https://4122a438-a-62cb3a1a-s-sites.googlegroups.com/site/phillipfknaack/home/pics/batarang/batarang_2_1280x1024.png";
     var bg = "background-image:url(" + bgUrl + ");" +
-        "width: 100%;" +
-        "height: 100%;" +
         "background-size: cover;" +
         "background-position: center;";
 
     var setBackground = function() {
-        var bgSet = 0;
-        var pfkDivs = document.getElementsByClassName("wl");
+        var bgSet = 0, pfkDivs;
+
+        // background of common div for all mail folders
+        pfkDivs = document.getElementsByClassName("Tm");
         if (pfkDivs !== undefined)
         {
             var pfkDiv = pfkDivs[0];
             if (pfkDiv !== undefined)
             {
                 pfkDiv.setAttribute("style",bg);
-                bgSet = 1;
+                bgSet += 1;
             }
         }
-
-        if (bgSet === 0)
+        else
         {
-            console.warn("PFK Gmail Background Setter did not find the right div");
+            console.warn("PFK Gmail Background Setter did not find the right div1");
+        }
+
+	// new gmail view's left thingy is a slightly too prominent color.
+        pfkDivs = document.getElementsByClassName("a6o");
+        if (pfkDivs !== undefined)
+        {
+            pfkDiv = pfkDivs[0];
+            if (pfkDiv !== undefined)
+            {
+                pfkDiv.setAttribute("style","background-color: black");
+                bgSet += 1;
+            }
+        }
+        else
+        {
+            console.warn("PFK Gmail Background Setter did not find the right div2");
+        }
+
+        if (bgSet !== 2)
+        {
             window.setTimeout(setBackground,2000);
         }
     };
 
     setBackground();
+
+    // i HATE HATE HATE HATE HATE popup vCards!
+    GM_addStyle(".YADHBe {display:none !important;}");
 
 })();
 
