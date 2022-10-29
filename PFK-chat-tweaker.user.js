@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1027.2002
+// @version      2022.1029.1459
 // @description  chat3 tweaker3
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -131,6 +131,9 @@
     GM_addStyle(".dJ9vNe { border-radius: 0px; }");
     // way too much whitespace below the typing box.
     GM_addStyle(".zmXnlc .WQKmIb .XganBc { padding-bottom: 20px; }");
+
+    // in the chat userlist, the names are too far apart -- scrunch up
+    GM_addStyle(".qa7SYc .LoYJxb { height: 24px; }");
 
 })();
 
