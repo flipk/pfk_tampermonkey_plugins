@@ -4,16 +4,17 @@
 
 ## work
 
-### [PFK-calendar-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-calendar-tweaker.user.js)
-### [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
-### [PFK-gmail-background.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
-### [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
+### [PFK calendar tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-calendar-tweaker.user.js)
+### [PFK chat tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
+### [PFK gmail background](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
+### [PFK gmail unread red](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
 
-## home
+## personal
 
-### [PFK-chat-tweaker.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
-### [PFK-gmail-background.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
-### [PFK-gmail-unread-red.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
-### [PFK-500px.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/attempts/PFK-500px.user.js)
-### [PFK-instagram.user.js](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-instagram.user.js)
+### [PFK calendar tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-calendar-tweaker.user.js)
+### [PFK chat tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
+### [PFK gmail background](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
+### [PFK gmail unread red](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
+### [PFK 500px tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-500px.user.js)
+### [PFK instagram tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-instagram.user.js)
 
