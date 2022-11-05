@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1029.1459
+// @version      2022.1104.1802
 // @description  chat3 tweaker3
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -135,7 +135,150 @@
     // in the chat userlist, the names are too far apart -- scrunch up
     GM_addStyle(".qa7SYc .LoYJxb { height: 24px; }");
 
+    // in the chat user list, a green dot looks like this:
+    //   E2XEef NYNc9d.ENeJAb dDI85b.fLKygf cPjwNc  Qgwczb
+    // while an Away dot looks like this:
+    //   E2XEef NYNc9d.ENeJAb dDI85b.fLKygf cPjwNc  R90p3b.vMbxHf.H14eUd
+
+    // document.getElementsByClassName("fh7VDd")   -> returns a list of all users in the chat list.
+    // getElementsByClassName("Qgwczb")  -> returns if a user is Active or not.
+    // getElementsByClassName("dDI85b fLKygf")   -> returns the "id" of each user,
+    //     like id="world/dm/0U1b2gAAAAE/h4gUu"
+
+    // persistent variable: this gets bound up into
+    // the setInterval closure.
+    //  .name : string
+    //  .status : string "Active" "Idle" "Away"
+    //  .prevStatus : string
+    //  .statusId : integer  2 = Active, 1 = Idle, 0 = Away
+    //  .changed : boolean
+    //  .timeStamp : integer  Date().getTime(), time in milliseconds
+    //  .age : integer in seconds since last timeStamp
+    var userStates = {}
+
+    // this part communicates with PFK gmail unread red
+    function checkUserStatus() {
+        var evt = {}
+        evt.pfk_gm_message_type = 'chat_active_list'
+        var jsdataParser = /.*(dm\/[0-9a-zA-Z_]+);.*/
+        var userlist = document.getElementsByClassName("fh7VDd");
+        for (i = 0; i < userlist.length; i++)
+        {
+            var u = userlist[i]
+            var personName = "personName"
+            var statusString = null
+            var statusId = null
+            var dmId = null
+            // the u div has a js-data with the dm/<id> in it.
+            if ('jsdata' in u.attributes)
+            {
+                dmId = jsdataParser.exec(u.attributes.jsdata.value);
+                if (dmId)
+                {
+                    // what i really want is the first parenthesized
+                    // subexpression of the regex ("dm/XXXXXXXXX")
+                    dmId = dmId[1]
+                }
+                else
+                {
+                    // group conversations don't actually have a dmId in them.
+                    // i'm skipping those.
+                    dmId = null
+                }
+            }
+            if (dmId)
+            {
+                // a span with a class of cPjwNc has the word Away or Idle or Active in it.
+                var statusSpan = u.getElementsByClassName("cPjwNc");
+                if (statusSpan.length > 0)
+                {
+                    statusString = statusSpan[0].innerHTML;
+                    if (statusString == "Active")
+                    {
+                        statusId = 2
+                    }
+                    else if (statusString == "Idle")
+                    {
+                        statusId = 1
+                    }
+                    else if (statusString == "Away")
+                    {
+                        statusId = 0
+                    }
+                }
+                if (statusString)
+                {
+                    // div with class "tzwwSb" has data-name="person's name"
+                    var tzwwdiv = u.getElementsByClassName("tzwwSb")
+                    if (tzwwdiv.length > 0 &&
+                        'data-name' in tzwwdiv[0].attributes)
+                    {
+                        personName = tzwwdiv[0].attributes['data-name'].value
+                    }
+                    var us;
+                    var ischanged = false
+                    var dateNow = new Date()
+                    var timeStamp = dateNow.getTime()
+                    if (dmId in userStates)
+                    {
+                        us = userStates[dmId]
+                        if (us.status != statusString)
+                        {
+                            us.prevStatus = us.status
+                            ischanged = true
+                            us.timeStamp = timeStamp
+                        }
+                    }
+                    else
+                    {
+                        // brand new entries do not get marked as 'changed'
+                        us = {}
+                        userStates[dmId] = us
+                        us.timeStamp = timeStamp
+                        us.prevStatus = statusString
+                    }
+                    us.name = personName
+                    us.status = statusString
+                    us.statusId = statusId
+                    us.ischanged = ischanged
+                    us.age = (timeStamp - us.timeStamp) / 1000
+                }
+            }
+        }
+        evt.userStates = userStates
+        window.parent.postMessage(evt, 'https://mail.google.com')
+//      console.info("PFK sending event",evt)
+    }
+
+    if (document.getElementsByClassName("fh7VDd").length > 0)
+    {
+        window.setInterval(checkUserStatus, 2000);
+    }
+
 })();
+
+// one of these will run in the chat app, the other in the gmail app,
+// so they need to communicate.
+//   https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+
+// inside the chat user list:
+//     window.addEventListener('message', (evt) => { some stuff })
+// then in the toplevel doc:
+//     chlif = document.getElementById('gtn-roster-iframe-id')
+//     chlif.contentWindow.postMessage('this is a test', 'https://chat.google.com')
+
+// other way, parent:
+//     window.addEventListener('message', (evt) => { some stuff })
+// child iframe:
+//     window.parent.postMessage('this is a test message!', 'https://mail.google.com')
+
+// not used anymore because statusString works better
+// div with class "Qgwczb" draws the green dot, so it's active.
+// var act = u.getElementsByClassName("Qgwczb");
+// if (act.length > 0)
+// {
+//   activeIds[dmId] = personName
+// }
 
 // Local Variables:
 // mode: javascript

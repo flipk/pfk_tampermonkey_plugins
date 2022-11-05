@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2022.1027.2020
+// @version      2022.1103.2344
 // @description  put background image in the proper div since theirs sucks.
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
-// @grant        none
+// @grant        GM_addStyle
 // ==/UserScript==
 
 // NOTE if you only match mail.google.com/*, this will fire in the chat PWA app too.
