@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2022.1104.1801
+// @version      2022.1104.2137
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -23,9 +23,11 @@
                 "top: 20px; left: 27px; z-index: 1000; border-radius: 50%; }")
     GM_addStyle(".PFKstatusdiv.PFKstatusActive { background-color: green; }")
     GM_addStyle(".PFKstatusdiv.PFKstatusIdle { background-color: #e37400; }")
-//  GM_addStyle(".PFKstatusdiv.PFKstatusAway { background-color: white; }")
     GM_addStyle(".PFKtimediv { position: absolute; z-index: 100; color: white; "+
                 "top: 27px; left: -14px; font-size: 15px; }")
+    GM_addStyle(".PFKBottomDiv { position: absolute; bottom: 0px; color: white; "+
+                "left: 75px; opacity: 70%; }")
+    GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; }")
 
     // turn a number of seconds into HH:MM:SS format.
     function formatSeconds(sec) {
@@ -81,15 +83,12 @@
                                 case 2: // Active
                                     statusDiv.classList.add("PFKstatusActive")
                                     statusDiv.classList.remove("PFKstatusIdle")
-//                                  statusDiv.classList.remove("PFKstatusAway")
                                     break
                                 case 1: // Idle
                                     statusDiv.classList.add("PFKstatusIdle")
                                     statusDiv.classList.remove("PFKstatusActive")
-//                                  statusDiv.classList.remove("PFKstatusAway")
                                     break
                                 case 0: // Away
-//                                  statusDiv.classList.add("PFKstatusAway")
                                     statusDiv.classList.remove("PFKstatusActive")
                                     statusDiv.classList.remove("PFKstatusIdle")
                                     break
@@ -101,27 +100,25 @@
         }
     }
 
-    // open up a text popup to log chat status changes.
-    var pu = window.open('about:blank', 'popupWindow',
-                         'height=200,width=1000,left=0,top=780,resizable=yes,scrollbars=no,'+
-                         'toolbar=no,menubar=no,location=no,directories=no,status=no')
+    // open up a div to log chat status changes.
+    var pu = document.createElement("div")
+    pu.classList.add("PFKBottomDiv")
 
-    // TODO : put the window size & position in localStorage
-    // TODO : figure out how to read back window size
-    //        if it changes and store it in localStorage
-
-    // install a callback to close the popup when the tab closes.
-    // do not use 'beforeunload' unless you want to cancel the close.
-    window.addEventListener('unload', function (e) {
-        pu.close()
-        e.returnValue = ''
-    })
+    // can't add it right away, needs to be at the end.
+    window.setTimeout(function() {
+        document.body.appendChild(pu)
+    }, 5000)
 
     // a utility function for adding output to the log window.
+    // removes a message after 60 seconds.
     function logString(str) {
-        pu.document.body.innerHTML += str + "<br>\n"
-        // force the scrollbar to the bottom of the div
-        pu.document.body.scrollTo(0,pu.document.body.scrollHeight)
+        var scrollMsg = document.createElement("div")
+        scrollMsg.classList.add("PFKBottomScrollMsg")
+        scrollMsg.innerHTML = str
+        window.setTimeout(function () {
+            pu.removeChild(scrollMsg)
+        }, 60000)
+        pu.appendChild(scrollMsg)
     }
 
     // this part communicates with PFK chat tweaker.
@@ -146,7 +143,7 @@
                         var d = new Date();
                         d.setTime(mu.timeStamp)
                         logString(d.toTimeString() +": " + mu.name +
-                                  " changed status from "+ mu.prevStatus +
+                                  " from "+ mu.prevStatus +
                                   " to " + mu.status)
                     }
                 }
@@ -155,6 +152,15 @@
     })
 
 })();
+
+
+
+// install a callback to close the popup when the tab closes.
+// do not use 'beforeunload' unless you want to cancel the close.
+// window.addEventListener('unload', function (e) {
+//    pu.close()
+//    e.returnValue = ''
+// })
 
 
 // THE OLD WAY!!!
