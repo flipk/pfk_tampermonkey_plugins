@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2022.1104.2137
+// @version      2022.1107.1141
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -24,9 +24,10 @@
     GM_addStyle(".PFKstatusdiv.PFKstatusActive { background-color: green; }")
     GM_addStyle(".PFKstatusdiv.PFKstatusIdle { background-color: #e37400; }")
     GM_addStyle(".PFKtimediv { position: absolute; z-index: 100; color: white; "+
-                "top: 27px; left: -14px; font-size: 15px; }")
+                "top: 31px; left: -9px; font-size: 12px; }")
     GM_addStyle(".PFKBottomDiv { position: absolute; bottom: 0px; color: white; "+
-                "left: 75px; opacity: 70%; }")
+                "left: 75px; opacity: 20%; }")
+    GM_addStyle(".PFKBottomDiv:hover { opacity: 100%; background: #000; }");
     GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; }")
 
     // turn a number of seconds into HH:MM:SS format.
@@ -77,7 +78,14 @@
                                 statusDiv = statusDiv[0]
                                 timeDiv = timeDiv[0]
                             }
-                            timeDiv.innerHTML = formatSeconds(u.age)
+                            if (u.age == -1)
+                            {
+                                timeDiv.innerHTML = "-"
+                            }
+                            else
+                            {
+                                timeDiv.innerHTML = formatSeconds(u.age)
+                            }
                             switch (u.statusId)
                             {
                                 case 2: // Active
@@ -121,6 +129,8 @@
         pu.appendChild(scrollMsg)
     }
 
+    var timeRegex = /(..:..:..).*/
+
     // this part communicates with PFK chat tweaker.
     window.addEventListener('message', (evt) => {
         if ('data' in evt &&
@@ -142,7 +152,16 @@
                     {
                         var d = new Date();
                         d.setTime(mu.timeStamp)
-                        logString(d.toTimeString() +": " + mu.name +
+                        var r = timeRegex.exec(d.toTimeString())
+                        if (r)
+                        {
+                            r = r[1]
+                        }
+                        else
+                        {
+                            r = "(unparsed)"
+                        }
+                        logString(r + ": " + mu.name +
                                   " from "+ mu.prevStatus +
                                   " to " + mu.status)
                     }

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1104.1802
+// @version      2022.1107.1142
 // @description  chat3 tweaker3
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -153,6 +153,7 @@
     //  .statusId : integer  2 = Active, 1 = Idle, 0 = Away
     //  .changed : boolean
     //  .timeStamp : integer  Date().getTime(), time in milliseconds
+    //               NOTE timeStamp == -1 if never seen a change.
     //  .age : integer in seconds since last timeStamp
     var userStates = {}
 
@@ -234,14 +235,21 @@
                         // brand new entries do not get marked as 'changed'
                         us = {}
                         userStates[dmId] = us
-                        us.timeStamp = timeStamp
+                        us.timeStamp = -1
                         us.prevStatus = statusString
                     }
                     us.name = personName
                     us.status = statusString
                     us.statusId = statusId
                     us.ischanged = ischanged
-                    us.age = (timeStamp - us.timeStamp) / 1000
+                    if (us.timeStamp == -1)
+                    {
+                        us.age = -1
+                    }
+                    else
+                    {
+                        us.age = (timeStamp - us.timeStamp) / 1000
+                    }
                 }
             }
         }
