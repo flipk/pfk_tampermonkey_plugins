@@ -163,7 +163,7 @@
     function checkUserStatus() {
         var evt = {}
         evt.pfk_gm_message_type = 'chat_active_list'
-        var jsdataParser = /.*(dm\/[0-9a-zA-Z_]+);.*/
+        var jsdataParser = /.*(dm\/[0-9a-zA-Z_-]+);.*/
         var userlist = document.getElementsByClassName("fh7VDd");
         for (i = 0; i < userlist.length; i++)
         {
