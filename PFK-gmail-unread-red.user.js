@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2022.1107.1141
+// @version      2022.1108.1031
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -143,6 +143,7 @@
             if (ev.pfk_gm_message_type == 'chat_active_list' &&
                 'userStates' in ev)
             {
+//              console.info("PFK got userStates", ev)
                 var us = ev.userStates
                 findMinimizedConversations(us)
                 for (var mukey of Object.keys(us))
@@ -163,7 +164,9 @@
                         }
                         logString(r + ": " + mu.name +
                                   " from "+ mu.prevStatus +
-                                  " to " + mu.status)
+                                  " " + mu.prevCustomStatus +
+                                  " to " + mu.status +
+                                  " " + mu.customStatus)
                     }
                 }
             }

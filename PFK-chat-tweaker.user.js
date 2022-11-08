@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1107.1142
+// @version      2022.1108.1031
 // @description  chat3 tweaker3
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -150,6 +150,8 @@
     //  .name : string
     //  .status : string "Active" "Idle" "Away"
     //  .prevStatus : string
+    //  .customStatus : whatever the user entered for custom status
+    //  .prevCustomStatus : string
     //  .statusId : integer  2 = Active, 1 = Idle, 0 = Away
     //  .changed : boolean
     //  .timeStamp : integer  Date().getTime(), time in milliseconds
@@ -169,6 +171,7 @@
             var personName = "personName"
             var statusString = null
             var statusId = null
+            var customStatus = ""
             var dmId = null
             // the u div has a js-data with the dm/<id> in it.
             if ('jsdata' in u.attributes)
@@ -216,16 +219,28 @@
                     {
                         personName = tzwwdiv[0].attributes['data-name'].value
                     }
+
+                    // span with class "yKB7" has the user's custom status, if entered
+                    var yKB7span = u.getElementsByClassName("yKB7")
+                    if (yKB7span.length > 0 &&
+                        'aria-label' in yKB7span[0].attributes)
+                    {
+                        customStatus = yKB7span[0].attributes['aria-label'].value
+                    }
+
                     var us;
                     var ischanged = false
                     var dateNow = new Date()
                     var timeStamp = dateNow.getTime()
+
                     if (dmId in userStates)
                     {
                         us = userStates[dmId]
-                        if (us.status != statusString)
+                        if (us.status != statusString ||
+                            us.customStatus != customStatus)
                         {
                             us.prevStatus = us.status
+                            us.prevCustomStatus = us.customStatus
                             ischanged = true
                             us.timeStamp = timeStamp
                         }
@@ -237,10 +252,13 @@
                         userStates[dmId] = us
                         us.timeStamp = -1
                         us.prevStatus = statusString
+                        us.prevCustomStatus = customStatus
                     }
+
                     us.name = personName
                     us.status = statusString
                     us.statusId = statusId
+                    us.customStatus = customStatus
                     us.ischanged = ischanged
                     if (us.timeStamp == -1)
                     {
