@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2022.1108.2035
+// @version      2022.1109.1404
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -25,15 +25,17 @@
     GM_addStyle(".PFKstatusdiv.PFKstatusIdle { background-color: #e37400; }")
     GM_addStyle(".PFKtimediv { position: absolute; z-index: 100; color: white; "+
                 "top: 31px; left: -9px; font-size: 12px; }")
+
     GM_addStyle(".PFKBottomDiv { position: absolute; bottom: 0px; " +
-                "color: white; left: 75px; }")
+                "color: white; left: 75px; transition: 0.2s; }")
+
+    GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; opacity: 20%;}")
+    GM_addStyle(".PFKBottomScrollMsgHighlight { opacity: 100%; background: #000; }")
+    GM_addStyle(".PFKBottomScrollMsgFaded { opacity: 5%; }")
+
     GM_addStyle(".PFKBottomDiv:hover { background: #000; }")
-    GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; " +
-                "transition: 0.2s; opacity: 20%; }")
-    GM_addStyle(".PFKBottomScrollMsgHighlight { opacity: 100%; " +
-                "background: #000; }")
-    GM_addStyle(".PFKBottomScrollMsgFaded { opacity: 10%; }")
-    GM_addStyle(".PFKBottomScrollMsg:hover { opacity: 100%; }")
+    GM_addStyle(".PFKBottomDiv:hover .PFKBottomScrollMsg { opacity: 30%; }")
+    GM_addStyle(".PFKBottomDiv:hover .PFKBottomScrollMsg:hover { opacity: 100%; }")
 
     // turn a number of seconds into HH:MM:SS format.
     function formatSeconds(sec) {
@@ -136,7 +138,7 @@
             scrollMsg.classList.remove("PFKBottomScrollMsgHighlight")
         },5000)
 
-        // 60 seconds later it fades to 10%.
+        // 60 seconds later it fades to 5%.
         window.setTimeout(function () {
             scrollMsg.classList.add("PFKBottomScrollMsgFaded")
         },65000)
@@ -182,10 +184,10 @@
                         {
                             r = "(unparsed)"
                         }
-                        logString(r + ": " + mu.name +
-                                  " from "+ mu.prevStatus +
+                        logString(r + " " + mu.name +
+                                  " "+ mu.prevStatus +
                                   " " + mu.prevCustomStatus +
-                                  " to " + mu.status +
+                                  " ⟹ " + mu.status +
                                   " " + mu.customStatus)
                     }
                 }
