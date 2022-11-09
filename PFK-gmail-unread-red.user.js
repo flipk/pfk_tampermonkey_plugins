@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2022.1108.1031
+// @version      2022.1108.2035
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -25,10 +25,15 @@
     GM_addStyle(".PFKstatusdiv.PFKstatusIdle { background-color: #e37400; }")
     GM_addStyle(".PFKtimediv { position: absolute; z-index: 100; color: white; "+
                 "top: 31px; left: -9px; font-size: 12px; }")
-    GM_addStyle(".PFKBottomDiv { position: absolute; bottom: 0px; color: white; "+
-                "left: 75px; opacity: 20%; }")
-    GM_addStyle(".PFKBottomDiv:hover { opacity: 100%; background: #000; }");
-    GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; }")
+    GM_addStyle(".PFKBottomDiv { position: absolute; bottom: 0px; " +
+                "color: white; left: 75px; }")
+    GM_addStyle(".PFKBottomDiv:hover { background: #000; }")
+    GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; " +
+                "transition: 0.2s; opacity: 20%; }")
+    GM_addStyle(".PFKBottomScrollMsgHighlight { opacity: 100%; " +
+                "background: #000; }")
+    GM_addStyle(".PFKBottomScrollMsgFaded { opacity: 10%; }")
+    GM_addStyle(".PFKBottomScrollMsg:hover { opacity: 100%; }")
 
     // turn a number of seconds into HH:MM:SS format.
     function formatSeconds(sec) {
@@ -115,17 +120,32 @@
     // can't add it right away, needs to be at the end.
     window.setTimeout(function() {
         document.body.appendChild(pu)
-    }, 5000)
+    }, 10000)
 
     // a utility function for adding output to the log window.
     // removes a message after 60 seconds.
     function logString(str) {
         var scrollMsg = document.createElement("div")
-        scrollMsg.classList.add("PFKBottomScrollMsg")
         scrollMsg.innerHTML = str
+        scrollMsg.classList.add("PFKBottomScrollMsg")
+        scrollMsg.classList.add("PFKBottomScrollMsgHighlight")
+
+        // starts out highlighted.
+        // 5 seconds later, it fades to 20%.
+        window.setTimeout(function () {
+            scrollMsg.classList.remove("PFKBottomScrollMsgHighlight")
+        },5000)
+
+        // 60 seconds later it fades to 10%.
+        window.setTimeout(function () {
+            scrollMsg.classList.add("PFKBottomScrollMsgFaded")
+        },65000)
+
+        // 5 minutes later it is removed.
         window.setTimeout(function () {
             pu.removeChild(scrollMsg)
-        }, 60000)
+        },365000)
+
         pu.appendChild(scrollMsg)
     }
 
