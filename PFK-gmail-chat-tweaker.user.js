@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1109.1954
+// @version      2022.1110.1006
 // @description  the gmail side of doing things to chat
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -131,47 +131,68 @@
 
     // a utility function for adding output to the log window.
     // removes a message after 60 seconds.
+    var hiliteTime = 5000
+    var fadeTime = 60000
+    var removeTime = 300000
+//  var pfkConsole = function () { /*nothing*/ }
+    if (0)
+    {
+        // for testing only : copypaste into Console
+        hiliteTime = 5000
+        fadeTime = 5000
+        removeTime = 5000
+        pu = document.getElementsByClassName("PFKBottomDiv")[0]
+//      pfkConsole = console.info
+    }
+
     function logString(str) {
-        var scrollMsg = document.createElement("div")
-        scrollMsg.innerHTML = '<span class="PFKXspan">X</span> ' + str
-        scrollMsg.classList.add("PFKBottomScrollMsg")
-        scrollMsg.classList.add("PFKBottomScrollMsgHighlight")
-        scrollMsg.PFKtimerId = -1
+        var sm = document.createElement("div")
+        sm.innerHTML = '<span></span> ' + str
+        sm.classList.add("PFKBottomScrollMsg")
+        sm.classList.add("PFKBottomScrollMsgHighlight")
+        sm.pfk = {}
+        sm.pfk.timerId = -1
 
-        pu.appendChild(scrollMsg)
+        pu.appendChild(sm)
 
-        var xSpan = scrollMsg.getElementsByClassName("PFKXspan")[0]
-        scrollMsg.PFKremoveMe = function() {
-            pu.removeChild(scrollMsg)
-        }
-        scrollMsg.PFKunhighlite = function() {
-            scrollMsg.classList.remove("PFKBottomScrollMsgHighlight")
-        }
-        scrollMsg.PFKfade = function() {
-            scrollMsg.classList.add("PFKBottomScrollMsgFaded")
-        }
-        xSpan.onclick = function() {
-            if (scrollMsg.PFKtimerId != -1)
+        // the scrollMsg only has one child, the <span>.
+        sm.pfk.xSpan = sm.children[0]
+        sm.pfk.removeMe = function() {
+            if (sm.pfk.timerId != -1)
             {
-                window.clearTimeout(scrollMsg.PFKtimerId)
+//              pfkConsole('cancel timer', sm.pfk.timerId)
+                window.clearTimeout(sm.pfk.timerId)
+                sm.pfk.timerId = -1
             }
-            scrollMsg.PFKremoveMe()
+//          pfkConsole('removing child')
+            pu.removeChild(sm)
         }
 
         // starts out highlighted.
         // 5 seconds later, it fades to 20%.
-        scrollMsg.PFKtimerId = window.setTimeout(function () {
-            scrollMsg.PFKunhighlite()
+        // and the "X" doesn't appear until then.
+        sm.pfk.timerId = window.setTimeout(function () {
+//          pfkConsole('adding PFKXspan')
+            sm.pfk.xSpan.classList.add("PFKXspan")
+            sm.pfk.xSpan.innerHTML = "X"
+            sm.pfk.xSpan.onclick = sm.pfk.removeMe
+//          pfkConsole('removing hilite')
+            sm.classList.remove("PFKBottomScrollMsgHighlight")
             // 60 seconds later it fades to 5%.
-            scrollMsg.PFKtimerId = window.setTimeout(function() {
-                scrollMsg.PFKfade()
+            sm.pfk.timerId = window.setTimeout(function() {
+//              pfkConsole('fading')
+                sm.classList.add("PFKBottomScrollMsgFaded")
                 // 5 minutes later it is removed.
-                scrollMsg.PFKtimerId = window.setTimeout(function() {
-                    scrollMsg.PFKremoveMe()
-                    scrollMsg.PFKtimerId = -1
-                }, 300000)
-            }, 60000)
-        }, 5000)
+                sm.pfk.timerId = window.setTimeout(function() {
+//                  pfkConsole('removing')
+                    sm.pfk.timerId = -1
+                    sm.pfk.removeMe()
+                }, removeTime)
+//              pfkConsole('set timer id', sm.pfk.timerId, 'to remove')
+            }, fadeTime)
+//          pfkConsole('set timer id', sm.pfk.timerId, 'to fade')
+        }, hiliteTime)
+//      pfkConsole('set timer id', sm.pfk.timerId, 'to remove hilite')
     }
 
     var timeRegex = /(..:..:..).*/
