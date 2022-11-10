@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1109.1600
+// @version      2022.1109.1954
 // @description  the gmail side of doing things to chat
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -31,6 +31,8 @@
     GM_addStyle(".PFKBottomDiv:hover .PFKBottomScrollMsg { opacity: 30%; }")
     GM_addStyle(".PFKBottomDiv:hover .PFKBottomScrollMsg:hover { opacity: 100%; }")
 
+    GM_addStyle(".PFKXspan:hover { color: red; cursor: pointer; }")
+
     // turn a number of seconds into HH:MM:SS format, but
     // with leading zeros stripped off.
     var timePattern = /.*(00:00(:..)|00:0(.:..)|00:(..:..)|0(.:..:..)|(..:..:..)).*/
@@ -38,14 +40,13 @@
         var d = new Date()
         d.setTime(sec * 1000)
         var hms = timePattern.exec(d.toISOString())
-        if (hms)
-        {
-	    if      (hms[2]) hms = hms[2]
-	    else if (hms[3]) hms = hms[3]
-	    else if (hms[4]) hms = hms[4]
-	    else if (hms[5]) hms = hms[5]
-	    else if (hms[6]) hms = hms[6]
-	    else           hms = null
+        if (hms) {
+            if      (hms[2]) hms = hms[2]
+            else if (hms[3]) hms = hms[3]
+            else if (hms[4]) hms = hms[4]
+            else if (hms[5]) hms = hms[5]
+            else if (hms[6]) hms = hms[6]
+            else             hms = null
         }
         return hms
     }
@@ -132,27 +133,45 @@
     // removes a message after 60 seconds.
     function logString(str) {
         var scrollMsg = document.createElement("div")
-        scrollMsg.innerHTML = str
+        scrollMsg.innerHTML = '<span class="PFKXspan">X</span> ' + str
         scrollMsg.classList.add("PFKBottomScrollMsg")
         scrollMsg.classList.add("PFKBottomScrollMsgHighlight")
+        scrollMsg.PFKtimerId = -1
+
+        pu.appendChild(scrollMsg)
+
+        var xSpan = scrollMsg.getElementsByClassName("PFKXspan")[0]
+        scrollMsg.PFKremoveMe = function() {
+            pu.removeChild(scrollMsg)
+        }
+        scrollMsg.PFKunhighlite = function() {
+            scrollMsg.classList.remove("PFKBottomScrollMsgHighlight")
+        }
+        scrollMsg.PFKfade = function() {
+            scrollMsg.classList.add("PFKBottomScrollMsgFaded")
+        }
+        xSpan.onclick = function() {
+            if (scrollMsg.PFKtimerId != -1)
+            {
+                window.clearTimeout(scrollMsg.PFKtimerId)
+            }
+            scrollMsg.PFKremoveMe()
+        }
 
         // starts out highlighted.
         // 5 seconds later, it fades to 20%.
-        window.setTimeout(function () {
-            scrollMsg.classList.remove("PFKBottomScrollMsgHighlight")
-        },5000)
-
-        // 60 seconds later it fades to 5%.
-        window.setTimeout(function () {
-            scrollMsg.classList.add("PFKBottomScrollMsgFaded")
-        },65000)
-
-        // 5 minutes later it is removed.
-        window.setTimeout(function () {
-            pu.removeChild(scrollMsg)
-        },365000)
-
-        pu.appendChild(scrollMsg)
+        scrollMsg.PFKtimerId = window.setTimeout(function () {
+            scrollMsg.PFKunhighlite()
+            // 60 seconds later it fades to 5%.
+            scrollMsg.PFKtimerId = window.setTimeout(function() {
+                scrollMsg.PFKfade()
+                // 5 minutes later it is removed.
+                scrollMsg.PFKtimerId = window.setTimeout(function() {
+                    scrollMsg.PFKremoveMe()
+                    scrollMsg.PFKtimerId = -1
+                }, 300000)
+            }, 60000)
+        }, 5000)
     }
 
     var timeRegex = /(..:..:..).*/
