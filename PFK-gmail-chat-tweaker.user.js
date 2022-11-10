@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1110.1006
+// @version      2022.1110.1725
 // @description  the gmail side of doing things to chat
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -123,6 +123,27 @@
     // open up a div to log chat status changes.
     var pu = document.createElement("div")
     pu.classList.add("PFKBottomDiv")
+    pu.innerHTML = '<span style="opacity:20%">XA</span>'
+    var xaSpan = pu.children[0]
+    xaSpan.onclick = function() {
+        var toCall = []
+        var sms = pu.getElementsByClassName("PFKBottomScrollMsg");
+        for (var ind = 0; ind < sms.length; ind++)
+        {
+            var sm = sms[ind]
+            console.info('examining index', ind, ':', sm)
+            if ('pfk' in sm && 'removeMe' in sm.pfk)
+            {
+                // can't call the func now, because it will modify the
+                // list WHILE we're iterating over it.
+                toCall.push(sm.pfk.removeMe)
+            }
+        }
+        for (ind in toCall)
+        {
+            toCall[ind]()
+        }
+    }
 
     // can't add it right away, needs to be at the end.
     window.setTimeout(function() {
