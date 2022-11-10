@@ -8,6 +8,7 @@
 ### [PFK chat tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
 ### [PFK gmail background](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
 ### [PFK gmail unread red](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
+### [PFK gmail chat tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-chat-tweaker.user.js)
 
 ## personal
 
@@ -15,6 +16,7 @@
 ### [PFK chat tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-chat-tweaker.user.js)
 ### [PFK gmail background](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-background.user.js)
 ### [PFK gmail unread red](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-unread-red.user.js)
+### [PFK gmail chat tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-gmail-chat-tweaker.user.js)
 ### [PFK 500px tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-500px.user.js)
 ### [PFK instagram tweaker](https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/PFK-instagram.user.js)
 
