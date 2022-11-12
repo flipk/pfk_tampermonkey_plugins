@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1110.1725
+// @version      2022.1112.1747
 // @description  the gmail side of doing things to chat
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -22,6 +22,7 @@
 
     GM_addStyle(".PFKBottomDiv { position: absolute; bottom: 0px; " +
                 "color: white; left: 75px; transition: 0.2s; }")
+    GM_addStyle(".PFKBottomDivHide { display: none; }")
 
     GM_addStyle(".PFKBottomScrollMsg { display: block; width: 100%; opacity: 20%;}")
     GM_addStyle(".PFKBottomScrollMsgHighlight { opacity: 100%; background: #000; }")
@@ -32,6 +33,8 @@
     GM_addStyle(".PFKBottomDiv:hover .PFKBottomScrollMsg:hover { opacity: 100%; }")
 
     GM_addStyle(".PFKXspan:hover { color: red; cursor: pointer; }")
+    GM_addStyle(".PFKXAspan { opacity: 20%; }")
+    GM_addStyle(".PFKXAspan:hover { opacity: 100%; color: red; cursor: pointer; }")
 
     // turn a number of seconds into HH:MM:SS format, but
     // with leading zeros stripped off.
@@ -122,9 +125,18 @@
 
     // open up a div to log chat status changes.
     var pu = document.createElement("div")
+    var uhpu = document.createElement("div")
     pu.classList.add("PFKBottomDiv")
-    pu.innerHTML = '<span style="opacity:20%">XA</span>'
+    uhpu.classList.add("PFKBottomDiv")
+    uhpu.classList.add("PFKBottomDivHide")
+    pu.innerHTML = '<span>XA</span> <span>H</span>'
+    uhpu.innerHTML = '<span>xa</span> <span>UH</span>'
     var xaSpan = pu.children[0]
+    var hSpan = pu.children[1]
+    var uhSpan = uhpu.children[1]
+    xaSpan.classList.add("PFKXAspan")
+    hSpan.classList.add("PFKXAspan")
+    uhSpan.classList.add("PFKXAspan")
     xaSpan.onclick = function() {
         var toCall = []
         var sms = pu.getElementsByClassName("PFKBottomScrollMsg");
@@ -144,10 +156,19 @@
             toCall[ind]()
         }
     }
+    hSpan.onclick = function() {
+        uhpu.classList.remove("PFKBottomDivHide")
+        pu.classList.add("PFKBottomDivHide")
+    }
+    uhSpan.onclick = function() {
+        pu.classList.remove("PFKBottomDivHide")
+        uhpu.classList.add("PFKBottomDivHide")
+    }
 
     // can't add it right away, needs to be at the end.
     window.setTimeout(function() {
         document.body.appendChild(pu)
+        document.body.appendChild(uhpu)
     }, 10000)
 
     // a utility function for adding output to the log window.
@@ -155,7 +176,6 @@
     var hiliteTime = 5000
     var fadeTime = 60000
     var removeTime = 300000
-//  var pfkConsole = function () { /*nothing*/ }
     if (0)
     {
         // for testing only : copypaste into Console
@@ -163,7 +183,6 @@
         fadeTime = 5000
         removeTime = 5000
         pu = document.getElementsByClassName("PFKBottomDiv")[0]
-//      pfkConsole = console.info
     }
 
     function logString(str) {
@@ -181,11 +200,9 @@
         sm.pfk.removeMe = function() {
             if (sm.pfk.timerId != -1)
             {
-//              pfkConsole('cancel timer', sm.pfk.timerId)
                 window.clearTimeout(sm.pfk.timerId)
                 sm.pfk.timerId = -1
             }
-//          pfkConsole('removing child')
             pu.removeChild(sm)
         }
 
@@ -193,27 +210,20 @@
         // 5 seconds later, it fades to 20%.
         // and the "X" doesn't appear until then.
         sm.pfk.timerId = window.setTimeout(function () {
-//          pfkConsole('adding PFKXspan')
             sm.pfk.xSpan.classList.add("PFKXspan")
             sm.pfk.xSpan.innerHTML = "X"
             sm.pfk.xSpan.onclick = sm.pfk.removeMe
-//          pfkConsole('removing hilite')
             sm.classList.remove("PFKBottomScrollMsgHighlight")
             // 60 seconds later it fades to 5%.
             sm.pfk.timerId = window.setTimeout(function() {
-//              pfkConsole('fading')
                 sm.classList.add("PFKBottomScrollMsgFaded")
                 // 5 minutes later it is removed.
                 sm.pfk.timerId = window.setTimeout(function() {
-//                  pfkConsole('removing')
                     sm.pfk.timerId = -1
                     sm.pfk.removeMe()
                 }, removeTime)
-//              pfkConsole('set timer id', sm.pfk.timerId, 'to remove')
             }, fadeTime)
-//          pfkConsole('set timer id', sm.pfk.timerId, 'to fade')
         }, hiliteTime)
-//      pfkConsole('set timer id', sm.pfk.timerId, 'to remove hilite')
     }
 
     var timeRegex = /(..:..:..).*/
