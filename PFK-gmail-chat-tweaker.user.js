@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.1112.1747
+// @version      2022.1113.1820
 // @description  the gmail side of doing things to chat
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -133,8 +133,10 @@
     uhpu.innerHTML = '<span>xa</span> <span>UH</span>'
     var xaSpan = pu.children[0]
     var hSpan = pu.children[1]
+    var uhXaSpan = uhpu.children[0]
     var uhSpan = uhpu.children[1]
     xaSpan.classList.add("PFKXAspan")
+    uhXaSpan.classList.add("PFKXAspan")
     hSpan.classList.add("PFKXAspan")
     uhSpan.classList.add("PFKXAspan")
     xaSpan.onclick = function() {
