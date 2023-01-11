@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK calendar tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2022.0623.2001
+// @version      2023.0111.1130
 // @description  stupid corp conference room names are sooooo wide
 // @author       pfk@pfk.org
 // @match        https://calendar.google.com/calendar/*
@@ -14,10 +14,6 @@
 
     var config = { known : false, gmail : false };
     var columnCounter = 0;
-
-// conference room name : NI2kfb qZvm2d-ibnC6b-bN97Pc DX3x9d
-// unsub button : U26fgb mUbCce fKz7Od rF3YF uRguKd TJ2tCc qZvm2d-ibnC6b-JIbuQc M9Bg4d
-// options button : U26fgb JRtysb WzwrXb rF3YF uRguKd TJ2tCc qZvm2d-ibnC6b-JIbuQc
 
     function removeToolTip(classname) {
         var pfkDivs, count, d, ind;
@@ -69,9 +65,7 @@
         var pfkDivs;
         if (config.known == false || config.gmail == false) {
 //dbg       console.warn("PFK looking for calendar's divs");
-            var count = shortenCrNames("JClzi");
-            count += shortenCrNames("K9QN7e");
-            count += shortenCrNames("NI2kfb");
+            var count = shortenCrNames("toUqff");
             if (count > 0) {
 //dbg           console.warn("PFK found calendar, setting gmail to false");
                 config.gmail = false;
