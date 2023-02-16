@@ -47,6 +47,13 @@
             {
                 pfkDiv.setAttribute("style","background-color: black");
                 bgSet += 1;
+
+                // why so much margin between msgs and iconbar?
+                pfkDivs = document.getElementsByClassName("nH bkK");
+                if (pfkDivs.length > 0)
+                {
+                    pfkDivs[0].style.marginLeft = 0;
+                }
             }
         }
         else
