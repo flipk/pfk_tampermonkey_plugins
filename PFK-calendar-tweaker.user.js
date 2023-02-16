@@ -71,6 +71,8 @@
                 config.gmail = false;
                 config.known = true;
             }
+            shortenCrNames("cuBluc"); // title at top of day view
+            shortenCrNames("JClzi"); // inside a meeting box
         }
         if (config.known == false || config.gmail == true) {
 //dbg       console.warn("PFK looking for gmail calendar's divs");
