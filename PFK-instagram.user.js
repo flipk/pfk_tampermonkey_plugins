@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         instagram features
 // @namespace    http://tampermonkey.net/
-// @version      2022.0623.2001
+// @version      2023.0216.1727
 // @description  feature modification on instagram
 // @author       pfk@pfk.org
 // @match        https://www.instagram.com/*

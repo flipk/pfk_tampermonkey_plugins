@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK calendar tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2023.0111.1130
+// @version      2023.0216.1727
 // @description  stupid corp conference room names are sooooo wide
 // @author       pfk@pfk.org
 // @match        https://calendar.google.com/calendar/*

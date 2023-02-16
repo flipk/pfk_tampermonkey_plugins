@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2022.1103.2344
+// @version      2023.0216.1727
 // @description  put background image in the proper div since theirs sucks.
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
