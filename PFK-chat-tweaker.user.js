@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK chat tweaker
 // @namespace    http://tampermonkey.net/
-// @version      2023.0216.1727
+// @version      2023.0310.1837
 // @description  chat3 tweaker3
 // @author       pfk@pfk.org
 // @match        https://chat.google.com/*
@@ -53,6 +53,11 @@
 
     // make conversations go full width of window
     GM_addStyle(".Bl2pUd { padding: 0 2px 0 2px; }");
+
+    // stupid "User is typing..." notification now comes up
+    // OVER THE TOP OF THE LAST MESSAGE. make it transparent so
+    // it doesn't completely obscure that message. stupid
+    GM_addStyle(".tRuV8b .bNfiFb { background: transparent; }");
 
     // background color around messages
     GM_addStyle(".WQKmIb .Bl2pUd { background-color: " + configSettings.windowBackground + ";}");
