@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2023.0216.1727
+// @version      2023.0702.1748
 // @description  put background image in the proper div since theirs sucks.
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -14,7 +14,7 @@
 (function() {
     'use strict';
 
-    var bgUrl = "https://4122a438-a-62cb3a1a-s-sites.googlegroups.com/site/phillipfknaack/home/pics/batarang/batarang_2_1280x1024.png";
+    var bgUrl = "https://github.com/flipk/pfk_tampermonkey_plugins/raw/main/gmail_background.png";
     var bg = "background-image:url(" + bgUrl + ");" +
         "background-size: cover;" +
         "background-position: center;";
