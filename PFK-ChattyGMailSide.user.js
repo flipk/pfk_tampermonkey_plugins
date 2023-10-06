@@ -1,15 +1,12 @@
 // ==UserScript==
-// @name         PFK gmail background
+// @name         ChattyGMailSide
 // @namespace    http://tampermonkey.net/
-// @version      2023.1005.2216
-// @description  put background image in the proper div since theirs sucks.
-// @author       pfk@pfk.org
-// @match        https://mail.google.com/mail/*
+// @version      2023.1005.2218
+// @description  Chatty ChattyGMailSide
+// @author       You
+// @match        https://mail.google.com/chat/*
 // @grant        GM_addStyle
 // ==/UserScript==
-
-// NOTE if you only match mail.google.com/*, this will fire in the chat PWA app too.
-//      to prevent that, it must match mail.google.com/mail/* instead.
 
 (function() {
     'use strict';
@@ -19,25 +16,24 @@
         "background-size: cover; background-position: center;";
 
     var setBackground = function() {
-        var bgSet = 0, divs, div;
-
-        divs = document.getElementsByClassName("nH ar4 z")
+        var divs, div
+        divs = document.getElementsByClassName("bro")
         if (divs !== undefined && divs.length > 0)
         {
             div = divs[0]
-            div.setAttribute("style", bg);
-            bgSet += 1;
+            if (div.pfk_installed_bg == undefined)
+            {
+                div.innerHTML = "<img src=" + bgUrl + ">"
+                div.pfk_installed_bg = true
+            }
         }
-
-        if (bgSet !== 1)
-        {
-            // this only needs to fire once.
-            window.setTimeout(setBackground,2000);
-        }
-    };
-
-    setBackground();
-
+        // this needs to keep firing, because if you fullscreen
+        // a conversation and then close it, the entire div
+        // is rebuilt (apparently from a template) and so we
+        // have to just keep patching it back up again.
+        window.setTimeout(setBackground,1000)
+    }
+    setBackground()
 })();
 
 // Local Variables:
