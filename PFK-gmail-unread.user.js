@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail unread red
 // @namespace    http://tampermonkey.net/
-// @version      2023.1005.2217
+// @version      2024.0206.2040
 // @description  make unread stuff red
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -14,6 +14,9 @@
 
     // the "n1" class is added to unread folder names
     GM_addStyle(".nU.n1>.n0 { color:red !important; }")
+
+    // i HATE HATE HATE HATE HATE popup vCards!
+    GM_addStyle(".YADHBe {display:none !important;}")
 
 })();
 

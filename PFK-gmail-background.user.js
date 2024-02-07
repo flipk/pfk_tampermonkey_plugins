@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PFK gmail background
 // @namespace    http://tampermonkey.net/
-// @version      2023.1005.2216
+// @version      2024.0206.2039
 // @description  put background image in the proper div since theirs sucks.
 // @author       pfk@pfk.org
 // @match        https://mail.google.com/mail/*
@@ -27,6 +27,16 @@
             div = divs[0]
             div.setAttribute("style", bg);
             bgSet += 1;
+
+            // update the titlebar to a darker color
+            var meta = document.createElement('meta');
+            meta.name = "theme-color";
+            meta.content = "#3c4043";
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+        else
+        {
+            console.warn("PFK Gmail Background Setter did not find the right div1");
         }
 
         if (bgSet !== 1)
